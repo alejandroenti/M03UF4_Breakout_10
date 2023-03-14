@@ -129,9 +129,19 @@
   <ItemGroup>
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Brick.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="Pad.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Wall.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Pad.cpp" />
+    <ClCompile Include="Vector2.cpp" />
+    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
