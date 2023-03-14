@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vector2"
+#include "Vector2.h"
 
 
 class Brick {
@@ -9,7 +9,7 @@ private:
 	int health;
 
 public:
-	Brick (Vector2p, int h);
+	Brick (Vector2 p, int h);
 	Vector2	GetPosition();
 	void SetPosition(Vector2 p);
 	int GetHealth();
