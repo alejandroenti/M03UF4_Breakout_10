@@ -1,8 +1,8 @@
 #pragma once
-
+#include <iostream>
 #include "Vector2.h"
 
-enum WallType {HORIZONTAL, VERTICAL, CORNER};
+enum WallType { HORIZONTAL, VERTICAL, CORNER };
 
 class Wall {
 private:
@@ -10,9 +10,9 @@ private:
 	WallType type;
 
 
-public: 
+public:
 	Wall(WallType t, Vector2 p);
-	Vector2 GetPosition;
+	Vector2 GetPosition();
 	WallType GetType();
 	void Render();
 

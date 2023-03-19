@@ -12,9 +12,9 @@ private:
 public:
 	Pad(Vector2 p, int w);
 	int GetWidth();
-	void SetWidth();
+	void SetWidth(int w);
 	Vector2 GetPosition();
-	void SetPosition();
+	void SetPosition(Vector2 p);
 	void Update(Wall walls[]);
 	void Render();
 };

@@ -1,5 +1,5 @@
 #pragma once
-
+#include <iostream>
 #include "Vector2.h"
 
 
@@ -9,7 +9,7 @@ private:
 	int health;
 
 public:
-	Brick (Vector2 p, int h);
+	Brick(Vector2 p, int h);
 	Vector2	GetPosition();
 	void SetPosition(Vector2 p);
 	int GetHealth();
