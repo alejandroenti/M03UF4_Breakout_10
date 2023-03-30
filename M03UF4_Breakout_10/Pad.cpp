@@ -27,6 +27,8 @@ void Pad::Update(Wall walls[]) {
 }
 
 void Pad::Render() {
-    // call goToPosition(position);
-    std::cout << "---";
+    // Move cursor to position
+
+
+    
 }
