@@ -16,16 +16,26 @@ WallType Wall::GetType() {
 }
 
 void Wall::Render() {
-    // go to x, y position in terminal
+    
+    // Move cursor to position
+    ConsoleXY(position.x, position.y);
 
+    // Change color
+    ConsoleSetColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
 
-    if (type == VERTICAL) {
-        std::cout << "|";
-    }
-    else if (type == HORIZONTAL) {
+    // Render Pad
+    switch (type)
+    {
+    case HORIZONTAL:
         std::cout << "_";
-    }
-    else { // TODO corner
-
+        break;
+    case VERTICAL:
+        std::cout << "|";
+        break;
+    case CORNER:
+        std::cout << "/";
+        break;
+    default:
+        break;
     }
 }

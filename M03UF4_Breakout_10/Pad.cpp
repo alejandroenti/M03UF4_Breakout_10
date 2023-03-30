@@ -1,10 +1,5 @@
 #include "Pad.h"
 
-Pad::Pad(Vector2 p, int w) {
-    position = p;
-    width = w;
-}
-
 int Pad::GetWidth() {
     return width;
 }
@@ -28,7 +23,11 @@ void Pad::Update(Wall walls[]) {
 
 void Pad::Render() {
     // Move cursor to position
+    ConsoleXY(position.x, position.y);
 
+    // Change color
+    ConsoleSetColor(ConsoleColor::CYAN, ConsoleColor::BLACK);
 
-    
+    // Render Pad
+    std::cout << "-";
 }

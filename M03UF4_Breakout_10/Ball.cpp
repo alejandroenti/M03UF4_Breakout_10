@@ -7,8 +7,7 @@ Ball::Ball(Vector2 p, Vector2 dir, int dmg) {
 }
 
 void Ball::Bounce(Vector2 normal) {
-    position.SetX(position.GetX() * normal.GetX());
-    position.SetY(position.GetY() * normal.GetY());
+
 }
 
 int Ball::GetDamage() {
