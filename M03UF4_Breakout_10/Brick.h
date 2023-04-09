@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Vector2.h"
 
+#define NUM_BRICKS 72
 
 class Brick {
 private:

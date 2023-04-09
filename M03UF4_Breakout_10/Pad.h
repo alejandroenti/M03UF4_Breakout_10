@@ -4,6 +4,8 @@
 #include "Vector2.h"
 #include "Wall.h"
 
+#define NUM_PADS 3
+
 class Pad {
 
 private:

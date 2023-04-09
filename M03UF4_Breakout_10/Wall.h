@@ -5,6 +5,8 @@
 #include "ConsoleControl.h"
 #include "Vector2.h"
 
+#define NUM_WALLS 50 // TO DO
+
 enum WallType { HORIZONTAL, VERTICAL, CORNER };
 
 class Wall {
@@ -18,6 +20,9 @@ public:
 	Vector2 GetPosition();
 	WallType GetType();
 	void Render();
+
+	void Update(Wall walls[], Brick bricks[], Pad pads[]);
+
 
 
 };

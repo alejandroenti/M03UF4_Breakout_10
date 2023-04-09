@@ -1,5 +1,10 @@
 #include "Pad.h"
 
+Pad::Pad(Vector2 p, int w) {
+    position = p;
+    width = w;
+}
+
 int Pad::GetWidth() {
     return width;
 }
