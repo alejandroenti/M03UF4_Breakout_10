@@ -30,21 +30,21 @@ void GameManager::Menu() {
 
 	while (!keyPressed) {
 		ConsoleSetColor(ConsoleColor::GREEN, ConsoleColor::BLACK);
-		std::cout << "--------------------------------------------------------" << std::endl;
-		std::cout << "| ___ \\| ___ \\|  ___| / _ \\ | | / /|  _  || | | ||_   _|" << std::endl;
-		std::cout << "| |_/ /| |_/ /| |__  / /_\\ \\| |/ / | | | || | | |  | |  " << std::endl;
-		std::cout << "| ___ \\|    / |  __| |  _  ||    \\ | | | || | | |  | |  " << std::endl;
-		std::cout << "| |_/ /| |\\ \\ | |___ | | | || |\\  \\\\ \\_/ /| |_| |  | |  " << std::endl;
-		std::cout << "\\____/ \\_| \\_|\\____/ \\_| |_/\\_| \\_/ \\___/  \\___/   \\_/  " << std::endl;
-		std::cout << "--------------------------------------------------------\n\n" << std::endl;
+		std::cout << " --------------------------------------------------------" << std::endl;
+		std::cout << " | ___ \\| ___ \\|  ___| / _ \\ | | / /|  _  || | | ||_   _|" << std::endl;
+		std::cout << " | |_/ /| |_/ /| |__  / /_\\ \\| |/ / | | | || | | |  | |  " << std::endl;
+		std::cout << " | ___ \\|    / |  __| |  _  ||    \\ | | | || | | |  | |  " << std::endl;
+		std::cout << " | |_/ /| |\\ \\ | |___ | | | || |\\  \\\\ \\_/ /| |_| |  | |  " << std::endl;
+		std::cout << " \\____/ \\_| \\_|\\____/ \\_| |_/\\_| \\_/ \\___/  \\___/   \\_/  " << std::endl;
+		std::cout << " --------------------------------------------------------\n\n" << std::endl;
 
 		ConsoleSetColor(ConsoleColor::BLUE, ConsoleColor::BLACK);
-		std::cout << "  1 - Play" << std::endl;
-		std::cout << "  2 - Ranking" << std::endl;
-		std::cout << "  3 - Credits\n" << std::endl;
+		std::cout << " 1 - Play" << std::endl;
+		std::cout << " 2 - Ranking" << std::endl;
+		std::cout << " 3 - Credits\n" << std::endl;
 
 		ConsoleSetColor(ConsoleColor::RED, ConsoleColor::BLACK);
-		std::cout << "  0 - Exit" << std::endl;
+		std::cout << " 0 - Exit" << std::endl;
 
 		ConsoleSetColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
 		
@@ -64,7 +64,7 @@ void GameManager::Menu() {
 	else if (pressed2)
 		currentScene = Scene::GAMEPLAY;
 	else if (pressed3)
-		currentScene = Scene::GAMEPLAY;
+		currentScene = Scene::CREDITS;
 	else
 		isPlaying = false;
 }
@@ -104,7 +104,33 @@ void GameManager::HighScore() {
 }
 
 void GameManager::Credits() {
+	int sleepTime = 16;
+	
+	bool keyPressed = false;
 
+	while (!keyPressed) {
+
+		ConsoleSetColor(ConsoleColor::GREEN, ConsoleColor::BLACK);
+		std::cout << " -------------------------------------------------" << std::endl;	 
+		std::cout << " /  __ \\| ___ \\|  ___||  _  \\|_   _||_   _|/  ___|" << std::endl;	 
+		std::cout << " | /  \\/| |_/ /| |__  | | | |  | |    | |  \\ `--. " << std::endl;	 
+		std::cout << " | |    |    / |  __| | | | |  | |    | |   `--. \\" << std::endl;	 
+		std::cout << " | \\__/\\| |\\ \\ | |___ | |/ /  _| |_   | |  /\\__/ /" << std::endl;	 
+		std::cout << "  \\____/\\_| \\_|\\____/ |___/   \\___/   \\_/  \\____/" << std::endl;	 
+		std::cout << " ------------------------------------------------\n" << std::endl;
+
+		ConsoleSetColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
+		std::cout << " Programmed by Alejandro Lopez & Oriol Valls" << std::endl;
+		std::cout << " Directed by Eduard Arnau" << std::endl;
+		std::cout << " Made in ENTI" << std::endl;
+
+		keyPressed = GetAsyncKeyState(VK_SPACE) != 0;
+
+		Sleep(sleepTime);
+		system("cls");
+	}
+
+	currentScene = GameManager::MENU;
 }
 
 void GameManager::InitGamePlay(int width, int height, Pad** p, Ball** b, std::vector<Wall>& w, std::vector<Brick>& bricks) {
