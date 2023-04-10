@@ -21,7 +21,7 @@ public:
 	WallType GetType();
 	void Render();
 
-	void Update(Wall walls[], Brick bricks[], Pad pads[]);
+	//void Update(Wall walls[], Brick bricks[], Pad pads[]);
 
 
 
