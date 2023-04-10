@@ -26,7 +26,7 @@ void GameManager::Menu() {
 	while (!keyPressed) {
 		std::cout << "--- MAIN MENU ---" << std::endl;
 		std::cout << "  Press 1 to play" << std::endl;
-		std::cout << "  Press 2 to play" << std::endl;
+		std::cout << "  Press 2 to exit" << std::endl;
 		
 		pressed1 = GetAsyncKeyState('1') != 0;
 		pressed2 = GetAsyncKeyState('2') != 0;
@@ -60,6 +60,9 @@ void GameManager::GamePlay() {
 
 		// Render all objects
 		playerPad->Render();
+		for (Wall wall : walls) {
+			wall.Render();
+		}
 
 		Sleep(sleepTime);
 		system("cls");
@@ -77,10 +80,10 @@ void GameManager::InitGamePlay(int width, int height, Pad** p, Ball** b, std::ve
 	
 	// WALLS
 	// Top Row
-	w.push_back(Wall(WallType::CORNER, Vector2(0, 0)));
+	w.push_back(Wall(WallType::CORNER1, Vector2(0, 0)));
 	for (int i = 1; i < width - 1; i++)
 		w.push_back(Wall(WallType::HORIZONTAL, Vector2(i, 0)));
-	w.push_back(Wall(WallType::CORNER, Vector2(width - 1, 0)));
+	w.push_back(Wall(WallType::CORNER2, Vector2(width - 1, 0)));
 	
 	// Middle Walls
 	for (int i = 0; i < height - 2; i++) {
@@ -90,12 +93,15 @@ void GameManager::InitGamePlay(int width, int height, Pad** p, Ball** b, std::ve
 	}
 
 	// Last Row
-	w.push_back(Wall(WallType::CORNER, Vector2(0, height - 1)));
+	w.push_back(Wall(WallType::CORNER2, Vector2(0, height - 1)));
 	for (int i = 1; i < width - 1; i++)
 		w.push_back(Wall(WallType::HORIZONTAL, Vector2(i, height - 1)));
-	w.push_back(Wall(WallType::CORNER, Vector2(width - 1, height - 1)));
+	w.push_back(Wall(WallType::CORNER1, Vector2(width - 1, height - 1)));
 
 	// BRICKS
+	/*for (int i = 1; i < width - 1; i++) {
+		bricks.push_back(Brick());
+	}*/
 	
 
 	// BALL

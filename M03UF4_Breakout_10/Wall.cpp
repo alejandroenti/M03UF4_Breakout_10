@@ -23,7 +23,7 @@ void Wall::Render() {
     // Change color
     ConsoleSetColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
 
-    // Render Pad
+    // Render Wall
     switch (type)
     {
     case HORIZONTAL:
@@ -32,8 +32,11 @@ void Wall::Render() {
     case VERTICAL:
         std::cout << "|";
         break;
-    case CORNER:
+    case CORNER1:
         std::cout << "/";
+        break;
+    case CORNER2:
+        std::cout << "\\";
         break;
     default:
         break;
