@@ -63,6 +63,10 @@ void GameManager::GamePlay() {
 		for (Wall wall : walls) {
 			wall.Render();
 		}
+		for (Brick brick : bricks) {
+			brick.Render();
+		}
+		ball->Render();
 
 		Sleep(sleepTime);
 		system("cls");
@@ -99,11 +103,12 @@ void GameManager::InitGamePlay(int width, int height, Pad** p, Ball** b, std::ve
 	w.push_back(Wall(WallType::CORNER1, Vector2(width - 1, height - 1)));
 
 	// BRICKS
-	/*for (int i = 1; i < width - 1; i++) {
-		bricks.push_back(Brick());
-	}*/
-	
+	for (int i = 0; i < 3; i++) {
+		for (int j = 1; j < width - 1; j++) {
+			bricks.push_back(Brick(Vector2(j, i + 1), i + 1));
+		}
+	}
 
 	// BALL
-	//*b = new Ball();
+	*b = new Ball(Vector2(width / 2, height / 2 + height / 4 - 5), Vector2(0, 1), 1);
 }

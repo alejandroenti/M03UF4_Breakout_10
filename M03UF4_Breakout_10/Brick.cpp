@@ -3,6 +3,7 @@
 Brick::Brick(Vector2 p, int h) {
     position = p;
     health = h;
+    color = (ConsoleColor)(9 + rand() % (13 + 1 - 9));
 }
 
 Vector2	Brick::GetPosition() {
@@ -27,11 +28,13 @@ void Brick::TakeDamage(int ammount) {
 }
 
 void Brick::Render() {
-    // goTo...
-    if (health > 0) {
-        std::cout << "@";
-    }
-    else {
-        std::cout << " ";
-    }
+   
+    // Move cursor to position
+    ConsoleXY(position.x, position.y);
+
+    // Change color
+    ConsoleSetColor(color, ConsoleColor::BLACK);
+
+    // Render Brick
+    std::cout << "@";
 }

@@ -103,6 +103,13 @@ void Ball::Update(Wall walls[], Brick bricks[], Pad pads[]) {
 }
 
 void Ball::Render() {
-    // call goToPosition(position);
+
+    // Move cursor to position
+    ConsoleXY(position.x, position.y);
+
+    // Change color
+    ConsoleSetColor(ConsoleColor::YELLOW, ConsoleColor::BLACK);
+
+    // Render Brick
     std::cout << "*";
 }
