@@ -13,6 +13,9 @@ void GameManager::Update() {
 	case GameManager::HIGHSCORE:
 		HighScore();
 		break;
+	case GameManager::CREDITS:
+		Credits();
+		break;
 	}
 }
 
@@ -22,22 +25,45 @@ void GameManager::Menu() {
 
 	bool pressed1;
 	bool pressed2;
+	bool pressed3;
+	bool pressed0;
 
 	while (!keyPressed) {
-		std::cout << "--- MAIN MENU ---" << std::endl;
-		std::cout << "  Press 1 to play" << std::endl;
-		std::cout << "  Press 2 to exit" << std::endl;
+		ConsoleSetColor(ConsoleColor::GREEN, ConsoleColor::BLACK);
+		std::cout << "--------------------------------------------------------" << std::endl;
+		std::cout << "| ___ \\| ___ \\|  ___| / _ \\ | | / /|  _  || | | ||_   _|" << std::endl;
+		std::cout << "| |_/ /| |_/ /| |__  / /_\\ \\| |/ / | | | || | | |  | |  " << std::endl;
+		std::cout << "| ___ \\|    / |  __| |  _  ||    \\ | | | || | | |  | |  " << std::endl;
+		std::cout << "| |_/ /| |\\ \\ | |___ | | | || |\\  \\\\ \\_/ /| |_| |  | |  " << std::endl;
+		std::cout << "\\____/ \\_| \\_|\\____/ \\_| |_/\\_| \\_/ \\___/  \\___/   \\_/  " << std::endl;
+		std::cout << "--------------------------------------------------------\n\n" << std::endl;
+
+		ConsoleSetColor(ConsoleColor::BLUE, ConsoleColor::BLACK);
+		std::cout << "  1 - Play" << std::endl;
+		std::cout << "  2 - Ranking" << std::endl;
+		std::cout << "  3 - Credits\n" << std::endl;
+
+		ConsoleSetColor(ConsoleColor::RED, ConsoleColor::BLACK);
+		std::cout << "  0 - Exit" << std::endl;
+
+		ConsoleSetColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
 		
 		pressed1 = GetAsyncKeyState('1') != 0;
 		pressed2 = GetAsyncKeyState('2') != 0;
+		pressed3 = GetAsyncKeyState('3') != 0;
+		pressed0 = GetAsyncKeyState('0') != 0;
 
-		keyPressed = pressed1 || pressed2;
+		keyPressed = pressed1 || pressed2 || pressed3 || pressed0;
 
 		Sleep(sleepTime);
 		system("cls");
 	}
 
 	if (pressed1)
+		currentScene = Scene::GAMEPLAY;
+	else if (pressed2)
+		currentScene = Scene::GAMEPLAY;
+	else if (pressed3)
 		currentScene = Scene::GAMEPLAY;
 	else
 		isPlaying = false;
@@ -74,6 +100,10 @@ void GameManager::GamePlay() {
 }
 
 void GameManager::HighScore() {
+
+}
+
+void GameManager::Credits() {
 
 }
 
