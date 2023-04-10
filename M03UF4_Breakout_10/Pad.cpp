@@ -30,4 +30,10 @@ void Pad::Render() {
 
     // Render Pad
     std::cout << "-";
+    for (int i = 0; i < width; i++) {
+        ConsoleXY(position.x + i + 1, position.y);
+        std::cout << "-";
+        ConsoleXY(position.x - i - 1, position.y);
+        std::cout << "-";
+    }
 }
