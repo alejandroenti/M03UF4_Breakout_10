@@ -13,12 +13,38 @@ void Pad::SetWidth(int w) {
 void Pad::SetPosition(Vector2 p) {
     position = p;
 }
-void Pad::Update(Wall walls[]) {
-    // check user input 
+
+bool Pad::CheckWalls(std::vector<Wall>walls, int direction) {
+
+    Vector2 padRight(position.x + width + 1, position.y);
+    Vector2 padLeft(position.x - width - 1, position.y);
+
+    for (auto it = walls.begin(); it != walls.end(); it++) {
+        if ((it->GetPosition() == padRight && direction == 1) || (it->GetPosition() == padLeft && direction == 0))
+            return false;
+    }
+
+    return true;
+}
+
+void Pad::Update(std::vector<Wall>walls) {
+    
+    bool pressedRight;
+    bool pressedLeft;
+    
+    // check user input
+    pressedRight = GetAsyncKeyState(VK_RIGHT) != 0;
+    pressedLeft = GetAsyncKeyState(VK_LEFT) != 0;
 
     // move the pad, taking care of walls
-
-
+    if (pressedRight) {
+        if (CheckWalls(walls, 1))
+            position.x += 1;
+    }
+    else if (pressedLeft) {
+        if (CheckWalls(walls, 0))
+            position.x -= 1;
+    }
 }
 
 void Pad::Render() {

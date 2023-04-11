@@ -78,11 +78,14 @@ void GameManager::GamePlay() {
 	std::vector<Wall> walls;
 	std::vector<Brick> bricks;
 
+	int score = 0;
+
 	InitGamePlay(25, 15, &playerPad, &ball, walls, bricks);
 
 	while (gamePlayRunning) {
 		// Update all objects
 		ball->Update(walls, bricks, playerPad);
+		playerPad->Update(walls);
 
 		// Render all objects
 		playerPad->Render();
@@ -140,7 +143,7 @@ void GameManager::Credits() {
 void GameManager::InitGamePlay(int width, int height, Pad** p, Ball** b, std::vector<Wall>& w, std::vector<Brick>& bricks) {
 
 	// PAD
-	*p = new Pad(Vector2(width / 2, height / 2 + height / 4), 3);
+	*p = new Pad(Vector2(width / 2, height / 2 + height / 4), 1);
 	
 	// WALLS
 	// Top Row
@@ -170,5 +173,5 @@ void GameManager::InitGamePlay(int width, int height, Pad** p, Ball** b, std::ve
 	}
 
 	// BALL
-	*b = new Ball(Vector2(width / 2, height / 2), Vector2(0, 1), 1);
+	*b = new Ball(Vector2(width / 2, height / 2 + height / 4 - 5), Vector2(0, 1), 1);
 }
