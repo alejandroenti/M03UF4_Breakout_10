@@ -20,6 +20,6 @@ public:
 	int GetDamage();
 	Vector2 GetDirection();
 	Vector2 GetPosition();
-	void Update(std::vector<Wall> walls, std::vector<Brick> bricks, Pad* pad);
+	void Update(std::vector<Wall> walls, std::vector<Brick>& bricks, Pad* pad);
 	void Render();
 };

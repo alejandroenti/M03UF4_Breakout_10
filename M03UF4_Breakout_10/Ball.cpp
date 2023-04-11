@@ -30,10 +30,10 @@ Vector2 Ball::GetPosition() {
     return position;
 }
 
-void Ball::Update(std::vector<Wall> walls, std::vector<Brick> bricks, Pad* pad) {
+void Ball::Update(std::vector<Wall> walls, std::vector<Brick>& bricks, Pad* pad) {
     
     Vector2 targetPos = position + direction;
-    
+
     // Check the walls
     for (auto it = walls.begin(); it != walls.end(); it++) {
         if (it->GetPosition() == position) {
@@ -53,11 +53,19 @@ void Ball::Update(std::vector<Wall> walls, std::vector<Brick> bricks, Pad* pad) 
         }
     }
 
+    int brickToDestroy = -1;
+    int cont = 0;
+
     for (auto it = bricks.begin(); it != bricks.end(); it++) {
         if (it->GetPosition() == position) {
-            direction.x *= -1;
+            direction.y *= -1;
+            brickToDestroy = cont;
         }
+        cont++;
     }
+
+    if (brickToDestroy > 0)
+        bricks.erase(bricks.begin() + brickToDestroy);
 
     position = position + direction;
 
