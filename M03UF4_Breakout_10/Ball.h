@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include "Vector2.h"
 #include "Wall.h"
 #include "Brick.h"
@@ -18,6 +20,6 @@ public:
 	int GetDamage();
 	Vector2 GetDirection();
 	Vector2 GetPosition();
-	void Update(Wall walls[], Brick bricks[], Pad pads[]);
+	void Update(std::vector<Wall> walls, std::vector<Brick> bricks, Pad* pad);
 	void Render();
 };

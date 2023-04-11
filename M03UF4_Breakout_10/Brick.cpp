@@ -19,12 +19,7 @@ int Brick::GetHealth() {
 }
 
 void Brick::TakeDamage(int ammount) {
-    if (ammount > health) {
-        health = 0;
-    }
-    else {
-        health = health - ammount;
-    }
+        health -= ammount;
 }
 
 void Brick::Render() {
