@@ -7,7 +7,7 @@
 
 #define NUM_WALLS 50 // TO DO
 
-enum WallType { HORIZONTAL, VERTICAL, CORNER1, CORNER2	 };
+enum WallType { HORIZONTAL, VERTICAL, CORNER };
 
 class Wall {
 private:

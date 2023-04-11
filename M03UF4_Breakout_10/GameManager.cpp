@@ -62,7 +62,7 @@ void GameManager::Menu() {
 	if (pressed1)
 		currentScene = Scene::GAMEPLAY;
 	else if (pressed2)
-		currentScene = Scene::GAMEPLAY;
+		currentScene = Scene::HIGHSCORE;
 	else if (pressed3)
 		currentScene = Scene::CREDITS;
 	else
@@ -78,7 +78,7 @@ void GameManager::GamePlay() {
 	std::vector<Wall> walls;
 	std::vector<Brick> bricks;
 
-	InitGamePlay(15, 25, &playerPad, &ball, walls, bricks);
+	InitGamePlay(25, 15, &playerPad, &ball, walls, bricks);
 
 	while (gamePlayRunning) {
 		// Update all objects
@@ -86,12 +86,10 @@ void GameManager::GamePlay() {
 
 		// Render all objects
 		playerPad->Render();
-		for (Wall wall : walls) {
-			wall.Render();
-		}
-		for (Brick brick : bricks) {
-			brick.Render();
-		}
+		for(std::vector<Wall>::iterator it = walls.begin(); it != walls.end(); it++)
+			it->Render();
+		for (std::vector<Brick>::iterator it = bricks.begin(); it != bricks.end(); it++)
+			it->Render();
 		ball->Render();
 
 		Sleep(sleepTime);
@@ -122,7 +120,12 @@ void GameManager::Credits() {
 		ConsoleSetColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
 		std::cout << " Programmed by Alejandro Lopez & Oriol Valls" << std::endl;
 		std::cout << " Directed by Eduard Arnau" << std::endl;
-		std::cout << " Made in ENTI" << std::endl;
+		std::cout << " Made in ENTI\n" << std::endl;
+
+		ConsoleSetColor(ConsoleColor::RED, ConsoleColor::BLACK);
+		std::cout << " Press Space to return" << std::endl;
+
+		ConsoleSetColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
 
 		keyPressed = GetAsyncKeyState(VK_SPACE) != 0;
 
@@ -140,10 +143,10 @@ void GameManager::InitGamePlay(int width, int height, Pad** p, Ball** b, std::ve
 	
 	// WALLS
 	// Top Row
-	w.push_back(Wall(WallType::CORNER1, Vector2(0, 0)));
+	w.push_back(Wall(WallType::CORNER, Vector2(0, 0)));
 	for (int i = 1; i < width - 1; i++)
 		w.push_back(Wall(WallType::HORIZONTAL, Vector2(i, 0)));
-	w.push_back(Wall(WallType::CORNER2, Vector2(width - 1, 0)));
+	w.push_back(Wall(WallType::CORNER, Vector2(width - 1, 0)));
 	
 	// Middle Walls
 	for (int i = 0; i < height - 2; i++) {
@@ -153,10 +156,10 @@ void GameManager::InitGamePlay(int width, int height, Pad** p, Ball** b, std::ve
 	}
 
 	// Last Row
-	w.push_back(Wall(WallType::CORNER2, Vector2(0, height - 1)));
+	w.push_back(Wall(WallType::CORNER, Vector2(0, height - 1)));
 	for (int i = 1; i < width - 1; i++)
 		w.push_back(Wall(WallType::HORIZONTAL, Vector2(i, height - 1)));
-	w.push_back(Wall(WallType::CORNER1, Vector2(width - 1, height - 1)));
+	w.push_back(Wall(WallType::CORNER, Vector2(width - 1, height - 1)));
 
 	// BRICKS
 	for (int i = 0; i < 3; i++) {

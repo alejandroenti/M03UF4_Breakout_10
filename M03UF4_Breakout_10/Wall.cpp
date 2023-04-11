@@ -27,16 +27,13 @@ void Wall::Render() {
     switch (type)
     {
     case HORIZONTAL:
-        std::cout << "_";
+        std::cout << "-";
         break;
     case VERTICAL:
         std::cout << "|";
         break;
-    case CORNER1:
-        std::cout << "/";
-        break;
-    case CORNER2:
-        std::cout << "\\";
+    case CORNER:
+        std::cout << "+";
         break;
     default:
         break;
