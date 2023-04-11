@@ -67,6 +67,25 @@ void Ball::Update(std::vector<Wall> walls, std::vector<Brick>& bricks, Pad* pad)
     if (brickToDestroy > 0)
         bricks.erase(bricks.begin() + brickToDestroy);
 
+    for (int i = 0; i <= pad->GetWidth() * 2; i++) {
+        Vector2 padPosition(pad->GetPosition().x - pad->GetWidth() + i, pad->GetPosition().y);
+        if (position == padPosition) {
+            if (i < pad->GetWidth()) {
+                direction.x = -1;
+                direction.y = -1;
+            } 
+            else if (i == pad->GetWidth()) {
+                direction.x = 0;
+                direction.y = -1;
+            } 
+            else {
+                direction.x = 1;
+                direction.y = -1;
+            }
+            
+        }
+    }
+
     position = position + direction;
 
     //// bounce() -> depende de walls, bricks y pads

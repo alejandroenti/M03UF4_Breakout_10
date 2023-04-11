@@ -170,5 +170,5 @@ void GameManager::InitGamePlay(int width, int height, Pad** p, Ball** b, std::ve
 	}
 
 	// BALL
-	*b = new Ball(Vector2(width / 2, height / 2), Vector2(1, 1), 1);
+	*b = new Ball(Vector2(width / 2, height / 2), Vector2(0, 1), 1);
 }
