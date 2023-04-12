@@ -42,8 +42,12 @@ void Ball::Update(std::vector<Wall> walls, std::vector<Brick>& bricks, Pad* pad)
             switch (it->GetType())
             {
             case HORIZONTAL:
-                if (it->GetPosition().y == LAST_WALL_ROW)
+                if (it->GetPosition().y == LAST_WALL_ROW) {
                     pad->TakeDamage();
+                    position = Vector2(pad->GetPosition().x, pad->GetPosition().y - 5);
+                    direction = Vector2(0, 1);
+                    break;
+                }
                 Bounce(Vector2(1, -1));
                 break;
             case VERTICAL:

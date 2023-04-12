@@ -197,8 +197,8 @@ void GameManager::HighScore() {
 			cont++;
 		}*/
 		auto it = scores.begin();
-		for (int i = 0; i < scores.size() || i < 5; i++) {
-			std::cout << " " << i << ". " << it->first << ":\t" << it->second << std::endl;
+		for (int i = 0; i < scores.size(); i++) {
+			std::cout << " " << i + 1 << ". " << it->first << ":\t" << it->second << std::endl;
 			it++;
 		}
 
