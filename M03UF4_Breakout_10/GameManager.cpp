@@ -66,7 +66,37 @@ void GameManager::Menu() {
 	else if (pressed3)
 		currentScene = Scene::CREDITS;
 	else
+		// Save Binary text before Exit
 		isPlaying = false;
+}
+
+void GameManager::PrintGameplayTitle() {
+	ConsoleSetColor(ConsoleColor::GREEN, ConsoleColor::BLACK);
+	std::cout << " ---------------------------------------------------------" << std::endl;
+	std::cout << "  _____   ___  ___  ___ _____ ______  _       ___  __   __" << std::endl;
+	std::cout << " |  __ \\ / _ \\ |  \\/  ||  ___|| ___ \\| |     / _ \\ \\ \\ / /" << std::endl;
+	std::cout << " | |  \\// /_\\ \\| .  . || |__  | |_/ /| |    / /_\\ \\ \\ V /" << std::endl;
+	std::cout << " | | __ |  _  || |\\/| ||  __| |  __/ | |    |  _  |  \\ /  " << std::endl;
+	std::cout << " | |_\\ \\| | | || |  | || |___ | |    | |____| | | |  | |  " << std::endl;
+	std::cout << "  \\____/\\_| |_/\\_|  |_/\\____/ \\_|    \\_____/\\_| |_/  \\_/  " << std::endl;
+	std::cout << " ---------------------------------------------------------" << std::endl;
+}
+
+void GameManager::PrintScore(Ball* b) {
+
+	// Change color
+	ConsoleSetColor(ConsoleColor::RED, ConsoleColor::BLACK);
+
+	// Render Brick
+	std::cout << "\n Score: " << b->GetScore();
+}
+
+void GameManager::PrintLifes(Pad* p) {
+	// Change color
+	ConsoleSetColor(ConsoleColor::RED, ConsoleColor::BLACK);
+
+	// Render Brick
+	std::cout << "\n Lifes: " << p->GetLifes() << "\n\n";
 }
 
 void GameManager::GamePlay() {
@@ -83,9 +113,50 @@ void GameManager::GamePlay() {
 	InitGamePlay(25, 15, &playerPad, &ball, walls, bricks);
 
 	while (gamePlayRunning) {
+
+		PrintGameplayTitle();
+		PrintScore(ball);
+		PrintLifes(playerPad);
+
+		if (playerPad->GetLifes() <= 0 || bricks.size() == 0) {
+
+			gamePlayRunning = false;
+
+			if (playerPad->GetLifes() <= 0) {
+				ConsoleSetColor(ConsoleColor::RED, ConsoleColor::BLACK);
+				std::cout << " __   __ _____  _   _   _      _____  _____  _____  _ " << std::endl;
+				std::cout << " \\ \\ / /|  _  || | | | | |    |  _  |/  ___||  ___|| |" << std::endl;
+				std::cout << "  \\ V / | | | || | | | | |    | | | |\\ `--. | |__  | |" << std::endl;
+				std::cout << "   \\ /  | | | || | | | | |    | | | | `--. \\|  __| | |" << std::endl;
+				std::cout << "   | |  \\ \\_/ /| |_| | | |____\\ \\_/ //\\__/ /| |___ |_|" << std::endl;
+				std::cout << "   \\_/   \\___/  \\___/  \\_____/ \\___/ \\____/ \\____/ (_)\n\n" << std::endl;
+			}
+			else {
+				ConsoleSetColor(ConsoleColor::GREEN, ConsoleColor::BLACK);
+				std::cout << " __   __ _____  _   _   _    _  _____  _   _  _ " << std::endl;
+				std::cout << " \\ \\ / /|  _  || | | | | |  | ||_   _|| \\ | || |" << std::endl;
+				std::cout << "  \\ V / | | | || | | | | |  | |  | |  |  \\| || |" << std::endl;
+				std::cout << "   \\ /  | | | || | | | | |/\\| |  | |  | . ` || |" << std::endl;
+				std::cout << "   | |  \\ \\_/ /| |_| | \\  /\\  / _| |_ | |\\  ||_|" << std::endl;
+				std::cout << "   \\_/   \\___/  \\___/   \\/  \\/  \\___/ \\_| \\_/(_)\n\n" << std::endl;
+			}
+
+			std::string name = "";
+
+			ConsoleSetColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
+			std::cout << " Introduce your name: ";
+			std::cin >> name;
+
+			scores.insert(std::pair<std::string, int>(name, ball->GetScore()));
+
+			currentScene = GameManager::MENU;
+			continue;
+		}
+
 		// Update all objects
 		ball->Update(walls, bricks, playerPad);
 		playerPad->Update(walls);
+		
 
 		// Render all objects
 		playerPad->Render();
@@ -103,6 +174,41 @@ void GameManager::GamePlay() {
 
 void GameManager::HighScore() {
 
+	int sleepTime = 100;
+
+	bool keyPressed = false;
+
+	while (!keyPressed) {
+
+		ConsoleSetColor(ConsoleColor::GREEN, ConsoleColor::BLACK);
+		std::cout << " ----------------------------------------------------------------------" << std::endl;
+		std::cout << "  _   _  _____  _____  _   _  _____  _____  _____ ______  _____  _____ " << std::endl;
+		std::cout << " | | | ||_   _||  __ \\| | | |/  ___|/  __ \\|  _  || ___ \\|  ___|/  ___|" << std::endl;
+		std::cout << " | |_| |  | |  | |  \\/| |_| |\\ `--. | /  \\/| | | || |_/ /| |__  \\ `--. " << std::endl;
+		std::cout << " |  _  |  | |  | | __ |  _  | `--. \\| |    | | | ||    / |  __|  `--. \\" << std::endl;
+		std::cout << " | | | | _| |_ | |_\\ \\| | | |/\\__/ /| \\__/\\\\ \\_/ /| |\\ \\ | |___ /\\__/ /" << std::endl;
+		std::cout << " \\_| |_/ \\___/  \\____/\\_| |_/\\____/  \\____/ \\___/ \\_| \\_|\\____/ \\____/ " << std::endl;
+		std::cout << " -----------------------------------------------------------------------" << std::endl;
+
+		ConsoleSetColor(ConsoleColor::YELLOW, ConsoleColor::BLACK);
+		int cont = 1;
+		for (auto it = scores.begin(); it != scores.end(); it++) {
+			std::cout << " " << cont << ". " << it->first << ":\t" << it->second << std::endl;
+			cont++;
+		}
+
+		ConsoleSetColor(ConsoleColor::RED, ConsoleColor::BLACK);
+		std::cout << " Press Space to return" << std::endl;
+
+		ConsoleSetColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
+
+		keyPressed = GetAsyncKeyState(VK_SPACE) != 0;
+
+		Sleep(sleepTime);
+		system("cls");
+	}
+
+	currentScene = GameManager::MENU;
 }
 
 void GameManager::Credits() {
@@ -142,36 +248,39 @@ void GameManager::Credits() {
 
 void GameManager::InitGamePlay(int width, int height, Pad** p, Ball** b, std::vector<Wall>& w, std::vector<Brick>& bricks) {
 
+	int offsetX = 1;
+	int offsetY = 11;
+
 	// PAD
-	*p = new Pad(Vector2(width / 2, height / 2 + height / 4), 1);
+	*p = new Pad(Vector2(width / 2 + offsetX, height / 2 + height / 4 + offsetY), 1);
 	
 	// WALLS
 	// Top Row
-	w.push_back(Wall(WallType::CORNER, Vector2(0, 0)));
+	w.push_back(Wall(WallType::CORNER, Vector2(0 + offsetX, offsetY)));
 	for (int i = 1; i < width - 1; i++)
-		w.push_back(Wall(WallType::HORIZONTAL, Vector2(i, 0)));
-	w.push_back(Wall(WallType::CORNER, Vector2(width - 1, 0)));
+		w.push_back(Wall(WallType::HORIZONTAL, Vector2(i + offsetX, offsetY)));
+	w.push_back(Wall(WallType::CORNER, Vector2(width - 1 + offsetX, offsetY)));
 	
 	// Middle Walls
 	for (int i = 0; i < height - 2; i++) {
 		for (int j = 0; j < 2; j++) {
-			w.push_back(Wall(WallType::VERTICAL, Vector2(j * (width - 1), i + 1)));
+			w.push_back(Wall(WallType::VERTICAL, Vector2(j * (width - 1) + offsetX, i + 1 + offsetY)));
 		}
 	}
 
 	// Last Row
-	w.push_back(Wall(WallType::CORNER, Vector2(0, height - 1)));
+	w.push_back(Wall(WallType::CORNER, Vector2(0 + offsetX, height - 1 + offsetY)));
 	for (int i = 1; i < width - 1; i++)
-		w.push_back(Wall(WallType::HORIZONTAL, Vector2(i, height - 1)));
-	w.push_back(Wall(WallType::CORNER, Vector2(width - 1, height - 1)));
+		w.push_back(Wall(WallType::HORIZONTAL, Vector2(i + offsetX, height - 1 + offsetY)));
+	w.push_back(Wall(WallType::CORNER, Vector2(width - 1 + offsetX, height - 1 + offsetY)));
 
 	// BRICKS
 	for (int i = 1; i <= 3; i++) {
 		for (int j = 1; j < width - 1; j++) {
-			bricks.push_back(Brick(Vector2(j, i), 1));
+			bricks.push_back(Brick(Vector2(j + offsetX, i + offsetY), 1));
 		}
 	}
 
 	// BALL
-	*b = new Ball(Vector2(width / 2, height / 2 + height / 4 - 5), Vector2(0, 1), 1);
+	*b = new Ball(Vector2(width / 2 + offsetX, height / 2 + height / 4 - 5 + offsetY), Vector2(0, 1), 1);
 }

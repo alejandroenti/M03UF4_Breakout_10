@@ -2,7 +2,9 @@
 
 #include <iostream>
 #include <Windows.h>
+#include <string>
 #include <vector>
+#include <map>
 
 #include "ConsoleControl.h"
 #include "Ball.h"
@@ -13,6 +15,8 @@
 class GameManager {
 
 private:
+	std::map<std::string, int> scores;
+
 	void Menu();
 	void GamePlay();
 	void HighScore();
@@ -27,4 +31,7 @@ public:
 	GameManager()
 		: currentScene(MENU), isPlaying(true) {}
 	void Update();
+	void PrintGameplayTitle();
+	void PrintScore(Ball* b);
+	void PrintLifes(Pad* p);
 };

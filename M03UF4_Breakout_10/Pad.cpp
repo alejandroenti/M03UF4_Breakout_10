@@ -14,6 +14,14 @@ void Pad::SetPosition(Vector2 p) {
     position = p;
 }
 
+int Pad::GetLifes() {
+    return lifes;
+}
+
+void Pad::TakeDamage() {
+    lifes--;
+}
+
 bool Pad::CheckWalls(std::vector<Wall>walls, int direction) {
 
     Vector2 padRight(position.x + width + 1, position.y);

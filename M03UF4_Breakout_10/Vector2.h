@@ -15,4 +15,8 @@ public:
 	bool operator== (Vector2& other) {
 		return x == other.x && y == other.y;
 	}
+	Vector2 operator* (Vector2& other) {
+		Vector2 result(x * other.x, y * other.y);
+		return result;
+	}
 };
