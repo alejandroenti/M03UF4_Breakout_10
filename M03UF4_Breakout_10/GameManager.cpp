@@ -147,7 +147,9 @@ void GameManager::GamePlay() {
 			std::cout << " Introduce your name: ";
 			std::cin >> name;
 
-			scores.insert(std::pair<std::string, int>(name, ball->GetScore()));
+			//scores.insert(std::pair<std::string, int>(name, ball->GetScore()));
+
+			SaveScore(name, ball->GetScore());
 
 			currentScene = GameManager::MENU;
 			continue;
@@ -195,12 +197,37 @@ void GameManager::HighScore() {
 		/*for (auto it = scores.begin(); it != scores.end(); it++) {
 			std::cout << " " << cont << ". " << it->first << ":\t" << it->second << std::endl;
 			cont++;
-		}*/
+		}
 		auto it = scores.begin();
 		for (int i = 0; i < scores.size(); i++) {
 			std::cout << " " << i + 1 << ". " << it->first << ":\t" << it->second << std::endl;
 			it++;
+		}*/
+
+		std::ifstream file("scores.wcs", std::ios::binary);
+
+		if (!file.is_open()) {
+			std::cout << "Error: cannot open file" << std::endl;
+			return;
 		}
+
+		std::map<int, std::string, std::greater<int>> scores; 
+		std::string line;
+		while (std::getline(file, line)) {
+			std::size_t pos = line.find(":");
+			if (pos != std::string::npos) {
+				std::string userName = line.substr(0, pos);
+				int score = std::stoi(line.substr(pos + 1));
+				scores[score] = userName;
+			}
+		}
+		file.close();
+
+		int i = 0;
+		for (auto it = scores.begin(); it != scores.end() && i < 5; ++it, ++i) {
+			std::cout << i + 1 << ". " << it->second << ": " << it->first << std::endl;
+		}
+
 
 		ConsoleSetColor(ConsoleColor::RED, ConsoleColor::BLACK);
 		std::cout << "\n Press Space to return" << std::endl;
@@ -288,4 +315,16 @@ void GameManager::InitGamePlay(int width, int height, Pad** p, Ball** b, std::ve
 
 	// BALL
 	*b = new Ball(Vector2(width / 2 + offsetX, height / 2 + height / 4 - 5 + offsetY), Vector2(0, 1), 1);
+}
+
+void GameManager::SaveScore(std::string userName, int score) {
+	std::ofstream file;
+	
+	file.open("scores.wcs", std::ios::app | std::ios::binary);
+
+	std::string content = userName + ":" + std::to_string(score) + "\n";
+
+	file.write(content.data(), content.size());
+	
+	file.close();
 }

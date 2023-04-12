@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <fstream>
+#include <algorithm>
 
 #include "ConsoleControl.h"
 #include "Ball.h"
@@ -34,4 +36,6 @@ public:
 	void PrintGameplayTitle();
 	void PrintScore(Ball* b);
 	void PrintLifes(Pad* p);
+	void SaveScore(std::string userName, int score);
+
 };
