@@ -37,14 +37,14 @@ void Ball::Update(std::vector<Wall> walls, std::vector<Brick>& bricks, Pad* pad)
     // Check the walls
     for (auto it = walls.begin(); it != walls.end(); it++) {
         if (it->GetPosition() == position) {
+
+
             switch (it->GetType())
             {
             case HORIZONTAL:
-                Bounce(Vector2(1, -1));
-
-                if (it->GetPosition().x == LAST_WALL_ROW)
+                if (it->GetPosition().y == LAST_WALL_ROW)
                     pad->TakeDamage();
-
+                Bounce(Vector2(1, -1));
                 break;
             case VERTICAL:
                 Bounce(Vector2(-1, 1));

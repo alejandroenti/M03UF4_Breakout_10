@@ -188,7 +188,7 @@ void GameManager::HighScore() {
 		std::cout << " |  _  |  | |  | | __ |  _  | `--. \\| |    | | | ||    / |  __|  `--. \\" << std::endl;
 		std::cout << " | | | | _| |_ | |_\\ \\| | | |/\\__/ /| \\__/\\\\ \\_/ /| |\\ \\ | |___ /\\__/ /" << std::endl;
 		std::cout << " \\_| |_/ \\___/  \\____/\\_| |_/\\____/  \\____/ \\___/ \\_| \\_|\\____/ \\____/ " << std::endl;
-		std::cout << " -----------------------------------------------------------------------" << std::endl;
+		std::cout << " -----------------------------------------------------------------------\n\n" << std::endl;
 
 		ConsoleSetColor(ConsoleColor::YELLOW, ConsoleColor::BLACK);
 		int cont = 1;
@@ -198,7 +198,7 @@ void GameManager::HighScore() {
 		}
 
 		ConsoleSetColor(ConsoleColor::RED, ConsoleColor::BLACK);
-		std::cout << " Press Space to return" << std::endl;
+		std::cout << "\n Press Space to return" << std::endl;
 
 		ConsoleSetColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
 

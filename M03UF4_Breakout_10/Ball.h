@@ -7,7 +7,7 @@
 #include "Brick.h"
 #include "Pad.h"
 
-#define LAST_WALL_ROW 13
+#define LAST_WALL_ROW 25
 
 class Ball {
 
