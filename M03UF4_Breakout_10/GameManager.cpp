@@ -192,9 +192,14 @@ void GameManager::HighScore() {
 
 		ConsoleSetColor(ConsoleColor::YELLOW, ConsoleColor::BLACK);
 		int cont = 1;
-		for (auto it = scores.begin(); it != scores.end(); it++) {
+		/*for (auto it = scores.begin(); it != scores.end(); it++) {
 			std::cout << " " << cont << ". " << it->first << ":\t" << it->second << std::endl;
 			cont++;
+		}*/
+		auto it = scores.begin();
+		for (int i = 0; i < scores.size() || i < 5; i++) {
+			std::cout << " " << i << ". " << it->first << ":\t" << it->second << std::endl;
+			it++;
 		}
 
 		ConsoleSetColor(ConsoleColor::RED, ConsoleColor::BLACK);
