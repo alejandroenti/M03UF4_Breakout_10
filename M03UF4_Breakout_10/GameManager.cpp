@@ -66,7 +66,6 @@ void GameManager::Menu() {
 	else if (pressed3)
 		currentScene = Scene::CREDITS;
 	else
-		// Save Binary text before Exit
 		isPlaying = false;
 }
 
@@ -204,7 +203,7 @@ void GameManager::HighScore() {
 			it++;
 		}*/
 
-		std::ifstream file("scores.wcs", std::ios::binary);
+		std::ifstream file("scores.wcs", std::ios::in | std::ios::binary);
 
 		if (!file.is_open()) {
 			std::cout << "Error: cannot open file" << std::endl;
@@ -225,7 +224,7 @@ void GameManager::HighScore() {
 
 		int i = 0;
 		for (auto it = scores.begin(); it != scores.end() && i < 5; ++it, ++i) {
-			std::cout << i + 1 << ". " << it->second << ": " << it->first << std::endl;
+			std::cout << " " << i + 1 << ". " << it->second << ": " << it->first << std::endl;
 		}
 
 
@@ -320,7 +319,7 @@ void GameManager::InitGamePlay(int width, int height, Pad** p, Ball** b, std::ve
 void GameManager::SaveScore(std::string userName, int score) {
 	std::ofstream file;
 	
-	file.open("scores.wcs", std::ios::app | std::ios::binary);
+	file.open("scores.wcs", std::ios::out | std::ios::app | std::ios::binary);
 
 	std::string content = userName + ":" + std::to_string(score) + "\n";
 
