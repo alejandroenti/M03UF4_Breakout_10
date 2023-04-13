@@ -60,22 +60,23 @@ void Ball::Update(std::vector<Wall> walls, std::vector<Brick>& bricks, Pad* pad)
         }
     }
 
-    int brickToDestroy = -1;
+    auto brickToDestroy = bricks.end();
     int cont = 0;
 
     for (auto it = bricks.begin(); it != bricks.end(); it++) {
         if (it->GetPosition() == position) {
             direction.y *= -1;
-            brickToDestroy = cont;
+            brickToDestroy = it;
             totalScore += score;
             score += 5;
+
             break;
         }
         cont++;
     }
 
-    if (brickToDestroy > 0)
-        bricks.erase(bricks.begin() + brickToDestroy);
+    if (brickToDestroy != bricks.end())
+        bricks.erase(brickToDestroy);
 
     for (int i = 0; i <= pad->GetWidth() * 2; i++) {
         Vector2 padPosition(pad->GetPosition().x - pad->GetWidth() + i, pad->GetPosition().y);
